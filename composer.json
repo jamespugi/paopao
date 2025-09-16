@@ -1,0 +1,8 @@
+{
+    "name": "crud/lavalust-app",
+    "description": "CRUD project using LavaLust PHP framework, ready for Render deployment",
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*"
+    }
+}
