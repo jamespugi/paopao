@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Create an Account</h2>
 
     <!-- ✅ Form -->
-    <form action="signup.php" method="POST" class="space-y-5">
+    <form action="" method="POST" class="space-y-5">
 
       <!-- Username -->
       <div>
