@@ -1,3 +1,23 @@
+<?php
+// signup.php
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
+
+    // ✅ Here you can insert the data into your database
+    // Example (adjust to your DB):
+    /*
+    include 'db.php';
+    $stmt = $pdo->prepare("INSERT INTO users (username, email) VALUES (?, ?)");
+    $stmt->execute([$username, $email]);
+    */
+
+    // ✅ After saving, redirect to index.php
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +57,7 @@
     <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Create an Account</h2>
 
     <!-- ✅ Form -->
-    <form action="/users/create" method="POST" class="space-y-5">
+    <form action="signup.php" method="POST" class="space-y-5">
 
       <!-- Username -->
       <div>

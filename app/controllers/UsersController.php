@@ -36,7 +36,7 @@ class UsersController extends Controller {
                 echo 'Failed to create user.';
             }
         }else{
-           $this->call->view('users/create');
+           $this->call->view('/users/create');
         }
         
     }
