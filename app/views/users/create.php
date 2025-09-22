@@ -5,15 +5,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST['username'] ?? '';
     $email = $_POST['email'] ?? '';
 
-    // ✅ Here you can insert the data into your database
-    // Example (adjust to your DB):
+    // ✅ Insert into DB here
     /*
     include 'db.php';
     $stmt = $pdo->prepare("INSERT INTO users (username, email) VALUES (?, ?)");
     $stmt->execute([$username, $email]);
     */
 
-    // ✅ After saving, redirect to index.php
     header("Location: index.php");
     exit();
 }
@@ -21,71 +19,127 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign Up</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Background gradient animation */
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #6366f1, #7c3aed);
-      background-size: 400% 400%;
-      animation: gradientAnimation 12s ease infinite;
-    }
+/* Background with gradient */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* Floating animation */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    .floating-card {
-      animation: float 6s ease-in-out infinite;
-    }
+/* Card styling */
+.signup-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+  max-width: 420px;
+  width: 100%;
+  color: #e0f2f1;
+}
+
+/* Title */
+.signup-card h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 32px;
+  color: #80deea;
+  margin-bottom: 25px;
+}
+
+/* Labels */
+.signup-card label {
+  font-weight: 600;
+  color: #b2dfdb;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+.signup-card input {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 12px;
+  outline: none;
+  width: 100%;
+  margin-bottom: 18px;
+  transition: 0.3s;
+}
+
+.signup-card input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px #26a69a;
+}
+
+/* Button */
+.signup-card button {
+  background: #43a047;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.signup-card button:hover {
+  background: #2e7d32;
+  transform: translateY(-2px);
+}
+
+/* Footer text */
+.signup-card p {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  color: #b2dfdb;
+}
+
+.signup-card a {
+  color: #80deea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-card a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body>
 
-  <!-- Card -->
-  <div class="floating-card bg-white/90 shadow-2xl rounded-2xl p-8 w-full max-w-md border border-blue-300 backdrop-blur-md">
-    <h2 class="text-3xl font-bold text-center text-blue-800 mb-6">Create an Account</h2>
+  <div class="signup-card">
+    <h2>Create an Account</h2>
 
-    <!-- ✅ Form -->
-    <form action="" method="POST" class="space-y-5">
-
-      <!-- Username -->
-      <div>
-        <label class="block text-blue-900 mb-2 font-medium">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter username" required
-               class="w-full px-4 py-2 border border-blue-400 rounded-lg bg-blue-50 text-blue-900 
-                      focus:ring-2 focus:ring-blue-500 focus:border-blue-600 outline-none transition">
+    <!-- Form -->
+    <form action="" method="POST">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter username" required>
       </div>
 
-      <!-- Email -->
-      <div>
-        <label class="block text-blue-900 mb-2 font-medium">Email</label>
-        <input type="email" name="email" placeholder="Enter email" required
-               class="w-full px-4 py-2 border border-blue-400 rounded-lg bg-blue-50 text-blue-900 
-                      focus:ring-2 focus:ring-blue-500 focus:border-blue-600 outline-none transition">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter email" required>
       </div>
 
-      <!-- Submit -->
-      <button type="submit" 
-              class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold shadow-md 
-                     hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition transform">
-        Sign Up
-      </button>
+      <button type="submit">Sign Up</button>
     </form>
 
-    <p class="mt-6 text-sm text-center text-blue-800">
+    <p>
       Already have an account? 
-      <a href="#" class="text-blue-700 font-semibold hover:underline">Log In</a>
+      <a href="login.php">Log In</a>
     </p>
   </div>
 

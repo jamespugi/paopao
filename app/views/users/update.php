@@ -4,71 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Update Record</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Background gradient animation */
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #6366f1, #7c3aed);
-      background-size: 400% 400%;
-      animation: gradientAnimation 12s ease infinite;
-    }
+/* Background with glass effect */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #e0f2f1;
+}
 
-    /* Floating animation */
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    .floating-card {
-      animation: float 6s ease-in-out infinite;
-    }
+/* Card */
+.update-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 35px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+  max-width: 450px;
+  width: 100%;
+}
 
-    /* Glow effect for button */
-    .glow-btn:hover {
-      box-shadow: 0 0 20px rgba(59,130,246,0.7), 0 0 30px rgba(139,92,246,0.6);
-    }
+/* Title */
+.update-card h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 32px;
+  color: #80deea;
+  margin-bottom: 25px;
+}
+
+/* Labels */
+.update-card label {
+  font-weight: 600;
+  color: #b2dfdb;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+.update-card input {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 12px;
+  outline: none;
+  width: 100%;
+  margin-bottom: 18px;
+  transition: 0.3s;
+}
+
+.update-card input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px #26a69a;
+}
+
+/* Button */
+.update-card button {
+  background: #26a69a;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.update-card button:hover {
+  background: #00897b;
+  transform: translateY(-2px);
+}
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body>
 
-  <!-- Card -->
-  <div class="floating-card bg-white/20 backdrop-blur-md shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/30">
-    <h2 class="text-3xl font-extrabold text-center text-white mb-6 tracking-wide drop-shadow-lg">
-      ✨ Update Record ✨
-    </h2>
+  <div class="update-card">
+    <h2>Update Record</h2>
 
     <!-- ✅ Update Form -->
-    <form action="<?= site_url('users/update/' . segment(4)); ?>" method="POST" class="space-y-5">
+    <form action="<?= site_url('users/update/' . segment(4)); ?>" method="POST">
 
       <!-- Username -->
-      <div>
-        <label class="block text-white mb-2 font-medium">Username</label>
-        <input type="text" id="username" name="username"  
-               value="<?= html_escape($user['username']); ?>" required
-               class="w-full px-4 py-2 border border-blue-300 rounded-lg bg-white/30 text-white placeholder-gray-200
-                      focus:ring-2 focus:ring-blue-400 focus:border-blue-500 outline-none transition">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username"
+               value="<?= html_escape($user['username']); ?>" required>
       </div>
 
       <!-- Email -->
-      <div>
-        <label class="block text-white mb-2 font-medium">Email</label>
-        <input type="email" name="email" 
-               value="<?= html_escape($user['email']); ?>" required
-               class="w-full px-4 py-2 border border-blue-300 rounded-lg bg-white/30 text-white placeholder-gray-200
-                      focus:ring-2 focus:ring-blue-400 focus:border-blue-500 outline-none transition">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email"
+               value="<?= html_escape($user['email']); ?>" required>
       </div>
 
       <!-- Submit -->
-      <button type="submit" 
-              class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold shadow-md transition transform hover:scale-105 glow-btn">
-        🚀 Update
-      </button>
+      <button type="submit">Update</button>
     </form>
   </div>
 
