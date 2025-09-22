@@ -85,7 +85,7 @@ class UsersController extends Controller {
                 'username' => $username,
                 'email' => $email
             );
-            if($this->Usersmodel->update($id, $data)) {
+            if($this->UsersModel->update($id, $data)) {
                 redirect();
             } else {
                 echo "Error updating record.";
