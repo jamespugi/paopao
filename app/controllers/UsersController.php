@@ -6,15 +6,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
  * 
  * Automatically generated via CLI.
  */
-
-    class UsersController extends Controller {
-        public function __construct()
-        {
-            parent::__construct();
-        }
+class UsersController extends Controller {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->call->library('Pagination'); // 
+    }
     public function index()
     {
         $this->call->model('UsersModel');
+        $this->call->library('Pagination'); // 
 
         $page = 1;
         if(isset($_GET['page']) && ! empty($_GET['page'])) {
@@ -33,40 +34,41 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         $total_rows = $user['total_rows'];
 
         $this->pagination->set_options([
-            'first_link'     => '⏮ First',
-            'last_link'      => 'Last ⏭',
-            'next_link'      => 'Next →',
-            'prev_link'      => '← Prev',
+            'first_link'     => '<span class="px-3 py-1 bg-emerald-600 text-green rounded hover:bg-emerald-700">⏮ First</span>',
+            'last_link'      => '<span class="px-3 py-1 bg-emerald-600 text-green rounded hover:bg-emerald-700">Last ⏭</span>',
+            'next_link'      => '<span class="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Next →</span>',
+            'prev_link'      => '<span class="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">← Prev</span>',
+            'cur_tag_open'   => '<span class="px-3 py-1 bg-emerald-600 text-white rounded">',
+            'cur_tag_close'  => '</span>',
+            'num_tag_open'   => '<span class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">',
+            'num_tag_close'  => '</span>',
             'page_delimiter' => '&page='
         ]);
-        $this->pagination->set_theme('bootstrap');
-        $this->pagination->initialize($total_rows, $records_per_page, $page, 'users?q='.$q);
+
+        $this->pagination->initialize($total_rows, $records_per_page, $page, 'users?q='.urldecode($q));
         $data['page'] = $this->pagination->paginate();
 
         $this->call->view('users/index', $data);
     }
 
-
     public function create()
     {
-        if($this->io->method() === 'post'){
-            $username = $this->io->post('username');
-            $email = $this->io->post('email');  
+        if ($this->io->method() == 'post') {
 
-            $data = [
+            $username =$this->io->post('username');
+            $email =$this->io->post('email');
+            $data = array(
                 'username' => $username,
                 'email' => $email
-            ];
-
-            if($this->UsersModel->insert($data)){
+            );
+            if($this->UsersModel->insert($data)) {
                 redirect();
             } else {
-                echo 'Failed to create user.';
+                echo "Error inserting record.";
             }
         }else{
-           $this->call->view('users/create');
+            $this->call->view('users/create');
         }
-        
     }
 
     function update($id)
@@ -76,34 +78,30 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             echo "User not found.";
             return;
         }
-        if($this->io->method() === 'post'){
-            $username = $this->io->post('username');
-            $email = $this->io->post('email');  
-
-            $data = [
+        if($this->io->method() == "post") {
+            $username =$this->io->post("username");
+            $email =$this->io->post("email");
+            $data = array(
                 'username' => $username,
                 'email' => $email
-            ];
-
-            if($this->UsersModel->update($id, $data)){
+            );
+            if($this->Usersmodel->update($id, $data)) {
                 redirect();
             } else {
-                echo 'Failed to update user.';
+                echo "Error updating record.";
             }
-        }else{
+        } else {
             $data['user'] = $user;
             $this->call->view('users/update', $data);
         }
     }
 
-    public function delete($id)
+    function delete($id)
     {
-        $this->call->model('UsersModel');
-        if($this->UsersModel->delete($id)){
+        if($this->Usersmodel->delete($id)) {
             redirect();
         } else {
-            echo 'Failed to delete user.';
+            echo "Error deleting record.";
         }
     }
-
 }
