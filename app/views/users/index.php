@@ -6,176 +6,73 @@
   <title>Students Info</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-/* Darker Background with Soft Aesthetic Blobs */
+/* Background with glass effect */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1e2f28, #2e3f35); /* dark muted green */
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   min-height: 100vh;
   margin: 0;
   padding: 20px;
-  position: relative;
-  overflow-x: hidden;
   color: #e0f2f1;
+  display: flex;
+  flex-direction: column;
 }
 
-body::before,
-body::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.2;
-  z-index: 0;
-}
-
-body::before {
-  width: 400px;
-  height: 400px;
-  background: #81c784;
-  top: -100px;
-  left: -100px;
-}
-
-body::after {
-  width: 500px;
-  height: 500px;
-  background: #4db6ac;
-  bottom: -120px;
-  right: -100px;
-}
-
-h1, .search-form, table, .btn-create, .pagination {
-  position: relative;
-  z-index: 1;
-}
-
-/* Header */
 h1 {
   text-align: center;
-  color: #a5d6a7;
+  font-weight: 700;
+  font-size: 40px;
+  color: #80deea;
   margin-bottom: 30px;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 1px;
 }
 
-/* Search Form */
-.search-form {
+/* Search bar and create button */
+.header-bar {
   display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.search-form .form-control {
-  background: #263a33;
-  color: #fff;
-  border: 1px solid #4caf50;
-}
-
-.search-form .form-control::placeholder {
-  color: #a5a5a5;
-}
-
-.search-form .btn-search {
-  background: #66bb6a;
-  color: #fff;
-  font-weight: 600;
+.search-form input {
+  background: rgba(255, 255, 255, 0.1);
   border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
-  transition: all 0.3s ease;
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 10px;
+  outline: none;
+  width: 250px;
 }
 
-.search-form .btn-search:hover {
-  background: #4caf50;
+.search-form input::placeholder {
+  color: #b0bec5;
 }
 
-/* Table Style */
-table {
-  width: 95%;
-  margin: 0 auto 40px;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  background: transparent;
-}
-
-thead {
-  background: transparent;
-}
-
-th {
-  background: #2e7d32;
-  color: #ffffff;
-  padding: 16px;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
+.search-form button {
+  background: #26a69a;
   border: none;
-  border-radius: 8px 8px 0 0;
-}
-
-tbody tr {
-  background: #374940;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-}
-
-tbody td {
-  padding: 16px;
-  font-size: 15px;
-  color: #e0f2f1;
-  border-top: 1px solid #2e3f35;
-  border-bottom: 1px solid #2e3f35;
-}
-
-tbody tr:hover {
-  background-color: #455a49;
-  transform: scale(1.005);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* Action Buttons */
-a.action-btn {
-  display: inline-block;
-  padding: 6px 14px;
-  font-size: 13px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: white;
   font-weight: 600;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
+  transition: 0.3s;
 }
 
-a.action-btn.update {
-  background: #66bb6a;
-  color: white;
+.search-form button:hover {
+  background: #00897b;
 }
 
-a.action-btn.update:hover {
-  background: #4caf50;
-}
-
-a.action-btn.delete {
-  background: #e57373;
-  color: white;
-}
-
-a.action-btn.delete:hover {
-  background: #d32f2f;
-}
-
-/* Create Button */
+/* Create button */
 .btn-create {
-  display: inline-block;
+  background: #43a047;
+  color: white;
   padding: 12px 22px;
-  background: #388e3c;
-  color: #fff;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 15px;
+  border-radius: 12px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
 .btn-create:hover {
@@ -183,82 +80,138 @@ a.action-btn.delete:hover {
   transform: translateY(-2px);
 }
 
-/* Pagination Styling */
+/* User cards grid */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+}
+
+.user-card h5 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.user-card p {
+  margin: 5px 0;
+  color: #b2dfdb;
+  font-size: 14px;
+}
+
+.card-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.action-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.action-btn.update {
+  background: #26a69a;
+  color: white;
+}
+
+.action-btn.update:hover {
+  background: #00897b;
+}
+
+.action-btn.delete {
+  background: #ef5350;
+  color: white;
+}
+
+.action-btn.delete:hover {
+  background: #c62828;
+}
+
+/* Pagination */
 .pagination {
+  margin-top: 30px;
   justify-content: center;
 }
 
 .pagination a,
 .pagination strong {
-  margin: 0 3px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #66bb6a !important;
+  margin: 0 5px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #26a69a;
   font-size: 14px;
   text-decoration: none;
-  color: #ffffff !important;
-  background: #388e3c !important;
+  color: #fff;
+  background: #26a69a;
 }
 
 .pagination a:hover {
-  background: #ffffff !important;
-  color: #388e3c !important;
+  background: #ffffff;
+  color: #26a69a;
 }
 
 .pagination strong {
-  background: #ffffff !important;
-  color: #388e3c !important;
+  background: #ffffff;
+  color: #26a69a;
 }
   </style>
 </head>
 <body>
   <h1>Students Info</h1>
 
-  <!-- Search -->
-  <form action="<?= site_url('users'); ?>" method="get" class="search-form">
-    <?php
-      $q = '';
-      if(isset($_GET['q'])) {
-        $q = $_GET['q'];
-      }
-    ?>
-    <input class="form-control" name="q" type="text" placeholder="Search..." value="<?= html_escape($q); ?>" style="max-width: 300px;">
-    <button type="submit" class="btn-search">Search</button>
-  </form>
+  <!-- Header: Search + Create -->
+  <div class="header-bar">
+    <form action="<?= site_url('users'); ?>" method="get" class="search-form d-flex gap-2">
+      <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+      <input name="q" type="text" placeholder="Search..." value="<?= html_escape($q); ?>">
+      <button type="submit">Search</button>
+    </form>
+    <a href="<?= site_url('users/create'); ?>" class="btn-create">+ Add Student</a>
+  </div>
 
-  <!-- Table -->
-  <table class="table table-hover text-center align-middle">
-    <thead>
-      <tr>
-        <th width="10%">ID</th>
-        <th width="30%">Name</th>
-        <th width="40%">Email</th>
-        <th width="20%">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach (html_escape($user) as $users): ?>
-        <tr>
-          <td><?= html_escape($users['id']); ?></td>
-          <td><?= html_escape($users['username']); ?></td>
-          <td><?= html_escape($users['email']); ?></td>
-          <td>
+  <!-- Cards Grid -->
+  <div class="cards-container">
+    <?php if (!empty($user)): ?>
+      <?php foreach ($user as $users): ?>
+        <div class="user-card">
+          <h5><?= html_escape($users['username']); ?></h5>
+          <p><strong>ID:</strong> <?= html_escape($users['id']); ?></p>
+          <p><strong>Email:</strong> <?= html_escape($users['email']); ?></p>
+          <div class="card-actions">
             <a href="<?= site_url('/users/update/'.$users['id']); ?>" class="action-btn update">Update</a>
             <a href="<?= site_url('/users/delete/'.$users['id']); ?>" class="action-btn delete" onclick="return confirm('Delete this user?');">Delete</a>
-          </td>
-        </tr>
+          </div>
+        </div>
       <?php endforeach; ?>
-    </tbody>
-  </table>
+    <?php else: ?>
+      <p class="text-center">No users found.</p>
+    <?php endif; ?>
+  </div>
 
   <!-- Pagination -->
   <div class="d-flex justify-content-center">
     <?= $page; ?>
-  </div>
-
-  <!-- Create Button -->
-  <div class="text-center mt-4">
-    <a href="<?= site_url('users/create'); ?>" class="btn-create">+ Create New User</a>
   </div>
 </body>
 </html>
