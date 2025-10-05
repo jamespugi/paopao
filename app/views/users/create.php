@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Create User</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * {
       margin: 0;
@@ -16,110 +17,95 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #87ceeb 0%, #e0f7ff 100%);
       overflow: hidden;
     }
 
-    /* Animated background glow */
-    body::before {
-      content: '';
+    /* Floating clouds animation */
+    .cloud {
       position: absolute;
-      width: 400px;
-      height: 400px;
-      background: #00f2fe;
-      border-radius: 50%;
-      filter: blur(200px);
-      top: -100px;
-      left: -100px;
-      animation: float1 10s infinite alternate ease-in-out;
+      background: white;
+      border-radius: 50px;
+      filter: blur(2px);
+      opacity: 0.8;
+      animation: floatClouds linear infinite;
     }
 
-    body::after {
-      content: '';
+    .cloud::before,
+    .cloud::after {
+      content: "";
       position: absolute;
-      width: 500px;
-      height: 500px;
-      background: #4facfe;
-      border-radius: 50%;
-      filter: blur(220px);
-      bottom: -150px;
-      right: -150px;
-      animation: float2 12s infinite alternate ease-in-out;
+      background: white;
+      width: 100%;
+      height: 100%;
+      border-radius: 50px;
     }
 
-    @keyframes float1 {
-      from { transform: translateY(0); }
-      to { transform: translateY(60px); }
-    }
+    .cloud1 { width: 180px; height: 60px; top: 15%; left: -200px; animation-duration: 60s; }
+    .cloud2 { width: 220px; height: 70px; top: 40%; left: -250px; animation-duration: 80s; }
+    .cloud3 { width: 160px; height: 50px; top: 70%; left: -180px; animation-duration: 70s; }
 
-    @keyframes float2 {
-      from { transform: translateY(0); }
-      to { transform: translateY(-60px); }
+    @keyframes floatClouds {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(120vw); }
     }
 
     .form-container {
       position: relative;
-      width: 380px;
-      padding: 40px;
+      width: 400px;
+      padding: 35px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
       border-radius: 15px;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3),
-                  0 0 40px rgba(79, 172, 254, 0.2);
-      z-index: 1;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      z-index: 2;
     }
 
     .form-container h1 {
       text-align: center;
-      font-size: 2em;
-      font-weight: 700;
-      color: #00f2fe;
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #0d47a1;
       margin-bottom: 25px;
-      text-shadow: 0 0 10px #00f2fe;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
     }
 
     .form-group input {
       width: 100%;
       padding: 12px 15px;
       font-size: 1em;
-      border-radius: 8px;
-      border: 2px solid transparent;
-      margin-bottom: 18px;
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+      color: #333;
       transition: 0.3s;
     }
 
-    .form-group input::placeholder {
-      color: #aaa;
-    }
-
     .form-group input:focus {
+      border-color: #0d47a1;
       outline: none;
-      border-color: #00f2fe;
-      box-shadow: 0 0 8px #00f2fe, 0 0 15px #4facfe;
-      background: rgba(255,255,255,0.15);
+      box-shadow: 0 0 6px rgba(13,71,161,0.3);
     }
 
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      color: #000;
+      background: #0d47a1;
+      color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 1.1em;
-      font-weight: 600;
+      font-weight: 500;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 0 15px rgba(0,242,254,0.5);
     }
 
     .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0,242,254,0.8), 0 0 40px rgba(79,172,254,0.6);
+      background: #1565c0;
     }
 
     .link-wrapper {
@@ -130,23 +116,25 @@
     .btn-link {
       display: inline-block;
       padding: 10px 18px;
-      background: none;
-      color: #00f2fe;
+      background: #6c757d;
+      color: #fff;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 500;
       transition: 0.3s;
-      border: 1px solid #00f2fe;
     }
 
     .btn-link:hover {
-      background: #00f2fe;
-      color: #000;
-      box-shadow: 0 0 12px #00f2fe;
+      background: #5a6268;
     }
   </style>
 </head>
 <body>
+  <!-- Clouds -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
   <div class="form-container">
     <h1>Create User</h1>
     <form id="user-form" action="<?=site_url('users/create/')?>" method="POST">
