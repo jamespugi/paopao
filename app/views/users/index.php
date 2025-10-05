@@ -9,8 +9,9 @@
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: radial-gradient(circle at top left, #141e30, #243b55);
-      color: #fff;
+      background: linear-gradient(to bottom, #b3e5fc, #e1f5fe);
+      background-attachment: fixed;
+      color: #333;
     }
 
     .dashboard-container {
@@ -28,46 +29,47 @@
 
     .dashboard-header h2 {
       font-weight: 700;
-      color: #00f2fe;
-      text-shadow: 0 0 10px #00f2fe;
+      color: #0277bd;
+      text-shadow: 0 0 5px rgba(2, 119, 189, 0.3);
     }
 
     .logout-btn {
       padding: 10px 18px;
       border: none;
       border-radius: 6px;
-      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      background: linear-gradient(90deg, #29b6f6, #0288d1);
       color: #fff;
       font-weight: 600;
       transition: 0.3s;
-      box-shadow: 0 0 10px rgba(255,65,108,0.6);
+      box-shadow: 0 3px 10px rgba(2, 136, 209, 0.4);
     }
     .logout-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(255,75,43,0.8);
+      box-shadow: 0 6px 15px rgba(2, 136, 209, 0.6);
     }
 
     .user-status {
       padding: 12px 18px;
       border-radius: 10px;
       font-size: 14px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.3);
-      color: #00f2fe;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #81d4fa;
+      color: #0277bd;
       margin-bottom: 20px;
+      backdrop-filter: blur(6px);
     }
     .user-status.error {
-      background: rgba(255, 65, 108, 0.1);
-      border: 1px solid rgba(255, 65, 108, 0.3);
-      color: #ff416c;
+      background: rgba(255, 205, 210, 0.8);
+      border: 1px solid #ef5350;
+      color: #c62828;
     }
 
     .table-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(15px);
       border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
     }
 
     table {
@@ -77,17 +79,17 @@
     }
 
     th {
-      background: #00f2fe;
-      color: #000;
+      background: #81d4fa;
+      color: #01579b;
       font-size: 14px;
       text-transform: uppercase;
       text-align: center;
     }
 
     td {
-      background: rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      color: #333;
       text-align: center;
     }
 
@@ -103,37 +105,37 @@
     }
 
     a.btn-update {
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      box-shadow: 0 0 10px rgba(0,242,254,0.5);
+      background: linear-gradient(90deg, #4fc3f7, #0288d1);
+      box-shadow: 0 3px 8px rgba(2, 136, 209, 0.3);
     }
     a.btn-update:hover {
-      box-shadow: 0 0 20px rgba(79,172,254,0.8);
+      box-shadow: 0 6px 15px rgba(2, 136, 209, 0.5);
     }
 
     a.btn-delete {
-      background: linear-gradient(90deg, #ff416c, #ff4b2b);
-      box-shadow: 0 0 10px rgba(255,65,108,0.5);
+      background: linear-gradient(90deg, #ef5350, #d32f2f);
+      box-shadow: 0 3px 8px rgba(211, 47, 47, 0.3);
     }
     a.btn-delete:hover {
-      box-shadow: 0 0 20px rgba(255,75,43,0.8);
+      box-shadow: 0 6px 15px rgba(211, 47, 47, 0.5);
     }
 
     .btn-create {
       width: 100%;
       padding: 14px;
       border: none;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      color: #000;
+      background: linear-gradient(90deg, #4fc3f7, #0288d1);
+      color: #fff;
       font-size: 1.1em;
       border-radius: 10px;
       font-weight: 600;
       transition: 0.3s;
       margin-top: 20px;
-      box-shadow: 0 0 15px rgba(0,242,254,0.6);
+      box-shadow: 0 4px 15px rgba(2, 136, 209, 0.4);
     }
     .btn-create:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 25px rgba(79,172,254,0.8);
+      box-shadow: 0 6px 25px rgba(2, 136, 209, 0.6);
     }
 
     .pagination-container {
@@ -144,27 +146,27 @@
 
     .search-form input {
       border-radius: 8px;
-      border: 1px solid rgba(0,242,254,0.4);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
+      border: 1px solid #81d4fa;
+      background: rgba(255, 255, 255, 0.7);
+      color: #333;
     }
     .search-form input:focus {
       outline: none;
-      border: 1px solid #00f2fe;
-      box-shadow: 0 0 10px #00f2fe;
-      background: rgba(255,255,255,0.15);
+      border: 1px solid #4fc3f7;
+      box-shadow: 0 0 10px #4fc3f7;
+      background: #fff;
     }
 
     .search-form button {
-      background: #00f2fe;
+      background: #4fc3f7;
       border: none;
-      color: #000;
+      color: #01579b;
       font-weight: 600;
       border-radius: 8px;
       padding: 8px 16px;
     }
     .search-form button:hover {
-      box-shadow: 0 0 15px #00f2fe;
+      box-shadow: 0 0 15px #4fc3f7;
     }
   </style>
 </head>

@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background: #f4f6f9;
+      background: linear-gradient(to bottom, #b3e5fc, #e1f5fe);
       font-family: "Poppins", sans-serif;
       display: flex;
       justify-content: center;
@@ -20,18 +20,20 @@
     .form-card {
       width: 100%;
       max-width: 450px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       padding: 30px;
+      backdrop-filter: blur(10px);
     }
 
     .form-card h1 {
       text-align: center;
       font-size: 1.8em;
       font-weight: 600;
-      color: #0d47a1;
+      color: #0277bd;
       margin-bottom: 25px;
+      text-shadow: 0 1px 4px rgba(2, 119, 189, 0.2);
     }
 
     .form-group {
@@ -44,17 +46,19 @@
       width: 100%;
       padding: 12px 15px;
       font-size: 1em;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #b3e5fc;
+      background: rgba(255, 255, 255, 0.9);
       color: #333;
+      transition: 0.3s;
     }
 
     .form-group input:focus,
     .form-group select:focus {
-      border-color: #0d47a1;
+      border-color: #4fc3f7;
       outline: none;
-      box-shadow: 0 0 6px rgba(13,71,161,0.3);
+      box-shadow: 0 0 8px rgba(79, 195, 247, 0.6);
+      background: #fff;
     }
 
     .toggle-password {
@@ -64,24 +68,26 @@
       transform: translateY(-50%);
       cursor: pointer;
       font-size: 1.1em;
-      color: #0d47a1;
+      color: #0288d1;
     }
 
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: #0d47a1;
+      background: linear-gradient(90deg, #4fc3f7, #0288d1);
       color: #fff;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 1.1em;
       font-weight: 500;
       cursor: pointer;
       transition: 0.3s;
+      box-shadow: 0 4px 12px rgba(2, 136, 209, 0.3);
     }
 
     .btn-submit:hover {
-      background: #1565c0;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(2, 136, 209, 0.5);
     }
 
     .btn-return {
@@ -89,16 +95,20 @@
       text-align: center;
       margin-top: 15px;
       padding: 12px;
-      background: #6c757d;
-      color: #fff;
-      border-radius: 6px;
+      background: #81d4fa;
+      color: #01579b;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: 500;
       transition: 0.3s;
+      box-shadow: 0 3px 10px rgba(129, 212, 250, 0.4);
     }
 
     .btn-return:hover {
-      background: #5a6268;
+      background: #4fc3f7;
+      color: #01579b;
+      box-shadow: 0 5px 15px rgba(79, 195, 247, 0.6);
+      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -136,7 +146,7 @@
     const togglePassword = document.querySelector('#togglePassword');
     const password = document.querySelector('#password');
 
-    if(togglePassword){
+    if (togglePassword) {
       togglePassword.addEventListener('click', function () {
         const type = password.type === 'password' ? 'text' : 'password';
         password.type = type;
